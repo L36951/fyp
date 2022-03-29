@@ -1,0 +1,22 @@
+.btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.container{
+    justify-items: center;
+    margin: auto;
+    align-items: center;
+}
+
+.searchbar{
+    width: fill-available;
+    margin: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+@media screen and (max-width: 960px) {
+
+}

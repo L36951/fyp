@@ -1,0 +1,107 @@
+.fish{
+    width:180px;
+    height: 100px;
+    background: radial-gradient(circle,#ffde4a,#fcac00);
+    border-radius: 50%;
+    position: relative;
+    margin:50px auto;
+
+}
+
+.fin{
+    width: 50px;
+    height:40px;
+    background: linear-gradient(to right top,#ffae00,#ffde4a);
+    border-radius: 100px 0 40px 0;
+    position:absolute;
+    top:-30px;
+    left:70px;
+    z-index: -2;
+}
+
+.eye{
+    width: 10px;
+    height:15px;
+    border-radius:50px ;
+    background: #000;
+    position: absolute;
+    top:30px;
+    left:25px;
+}
+
+.m{
+    width: 6px;
+    height:6px;
+    border-radius: 50%;
+    background: #fff;
+    margin:3px;
+}
+.mouth{
+    width:15px;
+    border-bottom:2px solid #d47100;
+    border-radius: 0 0 20px 20px;
+    position: absolute;
+    top:55px;
+    left:0px;
+
+}
+
+.g{
+    position: absolute;
+    top:15px;
+    left:0;
+    width:70px;
+    height:70px;
+    border-radius: 50px;
+    border-right: 1px solid #ffde4a;
+    filter: drop-shadow(2px 0px 2px #d47100);
+}
+
+.tail1{
+    width:60px;
+    height: 70px;
+    background: linear-gradient(to right top, #ffae00,#ffae00,#ffde4a);
+    border-radius:100px 0 80px 0 ;
+    position: absolute;
+    top:0;
+    right:-35px;
+    z-index: -2;
+    animation: anim1 2s infinite;
+    
+}
+.tail2{
+    width:60px;
+    height: 70px;
+    background: linear-gradient(to right top, #ffae00,#ffae00,#ffde4a);
+    border-radius:0 100px 0 80px;
+    position: absolute;
+    bottom:0;
+    right:-35px;
+    z-index: -2;
+    animation: anim2 2s infinite;
+    transform-origin: left top;
+}
+/*
+@keyframes anim1 {
+    0%{
+        transform: rotateY(0deg);
+    }
+    50%{
+        transform: rotateY(30deg);
+    }
+    100%{
+        transform: rotateY(0deg);
+    }
+}
+
+@keyframes anim2 {
+    0%{
+        transform: rotateY(0deg);
+    }
+    50%{
+        transform: rotateY(30deg);
+    }
+    100%{
+        transform: rotateY(0deg);
+    }
+}*/

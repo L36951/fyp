@@ -1,0 +1,8 @@
+.td{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 20px;
+    
+    word-wrap: break-word;
+}

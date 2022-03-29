@@ -4,21 +4,11 @@ const Location =({location})=>{
     return(
         <div className='location'>
             <p>
-                {location.street.number},{location.street.name}
+                
+                {location[0].value}
+                {location[0].value>location[1].value?<i className="fas fa-arrow-up" style={{color:'green'}}></i>:<i className="fas fa-arrow-down" style={{color:'red'}}></i>}
             </p>
-            <p>
-               {location.street.city}
-            </p>
-            <p>
-                {location.street.state}
-            </p>
-            <p>
-                {location.street.postcode}
-            </p>
-            <p>
-                {location.street.country}
-            </p>
-
+        
         </div>
     )
 }
