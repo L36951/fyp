@@ -1,18 +1,44 @@
 import React,{useEffect, useState} from "react";
-import { makeData } from "../../Utils";
+
 import Table from "../table";
 import TableColumn from '../TableColumn';
 //import ReactTable from "react-table";
 //import "react-table/react-table.css";
 import {useNavigate} from 'react-router-dom';
+import { colors } from "@material-ui/core";
+import List from "../List";
 function Fishponds(){
     
-    const [data,setData]=useState(makeData());
-    const [allData,setAllData] = useState();
-    const [accessor,setAccessor] = useState(['firstName','lastName','age','status','visits']);
-    const [header,setHeader] = useState(['First Name','Last Name','Age','Status','Visits']);
+    const [data,setData]=useState([]);
+    const [allData,setAllData] = useState([]);
+    const [accessor,setAccessor] = useState(['periodId','updatedAt','fishtype.fishtype']);
+    const [header,setHeader] = useState(['Period ID','Last Update','Fish Type']);
     const [column,setTesting]= useState(TableColumn(header,accessor));
+    const [link,setLink]=useState(['/dashboard','periodId'])
     const navigate = useNavigate();
+    
+
+/**********************************
+ * fetch data from API
+ **********************************/
+    useEffect(() => {
+      (async () => {
+          let fishpondData;
+          try {
+              const response = await fetch(`${process.env.REACT_APP_SECRET_APIPATH}api/period/query`);
+              fishpondData= await response.json();
+              
+          } catch (error) {
+              console.log(error);
+              fishpondData = [];
+          }
+          setAllData(fishpondData.data.map((d)=>{return ({...d,'updatedAt':d.updatedAt.split("T")[0]})}));
+          setData(fishpondData.data.map((d)=>{return ({...d,'updatedAt':d.updatedAt.split("T")[0]})}));
+          
+      })();
+  }, []);
+  
+  /*
     useEffect(()=>{
       (async ()=>{
         let res;
@@ -29,24 +55,36 @@ function Fishponds(){
         setData(res);
       })();
     },[]);
+    */
     
+    
+/*************************************************
+ * Search Function
+ * Search by ID, date, location
+ *************************************************/
+
     const filterData = event =>{
       const value = event.target.value.toLowerCase();
       const filterData = allData.filter(
-        d =>(`${d.firstName} ${d.lastName}`
+        d =>(`${d.periodId} ${d.updatedAt} ${d.fishtype.fishtype}`
         .toLowerCase()
         .includes(value)
-
         )
       );
       setData(filterData);
     }
 
+/*************************************************
+ * On row click function
+ * Redirect the page to dashponds by fishpondID
+ *************************************************/
+
     const onRowClick = (state, rowInfo, column, instance) => {
       return {
           onClick: e => {
-            navigate(`/dashboard?id=${rowInfo.index}`);  
-            //console.log(rowInfo.index);
+            
+            navigate(`/dashboard?id=${rowInfo.original.periodId}`);  
+            //console.log(rowInfo.original.fishpondId);
           }
       }
     }
@@ -54,10 +92,12 @@ function Fishponds(){
     return(
       <div>
         <input className='search-box' placeholder='Search...' onInput={filterData}/>
-      <Table
-       onRowClick={onRowClick}
+      <List
+        
         data={data}
-        columns={column}
+        header={header}
+        accessor={accessor}
+        link={link}
       />
       
       <br />

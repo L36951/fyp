@@ -1,0 +1,105 @@
+.d-flex {
+    display: -ms-flexbox !important;
+    display: flex !important;
+    border-style: outset;
+    width:60%;
+    margin-left: 20%;
+  
+    margin-right: .5rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem !important;
+   
+}
+
+.ml-auto, .mx-auto {
+    margin-left: auto !important
+}
+
+.btn-warning {
+    margin: .25rem;
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn-warning:hover {
+    color: #212529;
+    background-color: #e0a800;
+    border-color: #d39e00
+}
+
+.btn-warning.focus, .btn-warning:focus {
+    color: #212529;
+    background-color: #e0a800;
+    border-color: #d39e00;
+    box-shadow: 0 0 0 .2rem rgba(222, 170, 12, .5)
+}
+
+.btn-danger {
+    margin: .25rem;
+    display: inline-block;
+    font-weight: 400;
+
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130
+}
+
+.btn-danger.focus, .btn-danger:focus {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+    box-shadow: 0 0 0 .2rem rgba(225, 83, 97, .5)
+}
+@media screen and (max-width: 960px) {
+    .d-flex {
+        width: 95%;
+       margin-left: 1rem;
+       margin-right: 1rem;
+       margin-top: 1rem;
+       margin-bottom: 1rem;
+    }
+    .mt-4 {
+       
+    }
+}

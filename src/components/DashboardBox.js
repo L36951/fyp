@@ -2,45 +2,172 @@ import React, { useState, useEffect } from 'react';
 import SocialCard from './SocialCard';
 
 import './DashboardBox.css'
-const DasboardBox = (props) => {
-    const [users, setUsers] = useState([]);
-    const [allUsers,setAllUsers] = useState([]);
+import { PersonalVideo, Phone } from '@material-ui/icons';
+import { Card } from '@material-ui/core';
+import {useNavigate} from 'react-router-dom';
+const DasboardBox = ({ fishtankId }) => {
+    
+   
+    const [pHvalue, setPHvalue] = useState([]);
+   
     useEffect(() => {
         (async () => {
-            let userData;
+            let result;
             try {
-                const response = await fetch("https://randomuser.me/api/?results=10");
-                userData = await response.json();
+                const response = await fetch(`${process.env.REACT_APP_SECRET_APIPATH}api/sensorrecord/query?periodid=${fishtankId}&sensortype=pH%20value`);
+                result = await response.json();
+                
             } catch (error) {
                 console.log(error);
-                userData = [];
+                result = [];
             }
-            setAllUsers(userData.results);
-            setUsers(userData.results);
+            
+            setPHvalue([result.data[0],result.data[1]]);
+        
+            
+            
+        })();
+    }, []);
+  
+
+    const [waterTemperature, setWaterTemperature] = useState([]);
+    useEffect(() => {
+        (async () => {
+            let result;
+            try {
+                const response = await fetch(`${process.env.REACT_APP_SECRET_APIPATH}api/sensorrecord/query?periodid=${fishtankId}&sensortype=Water%20temperature`);
+                result = await response.json();
+                
+            } catch (error) {
+                console.log(error);
+                result = [];
+            }
+            if(result.data.length>1){
+                setWaterTemperature([result.data[0],result.data[1]]);
+              
+            }
+            
+            
         })();
     }, []);
 
-    const filterCard = event =>{
-        const value=event.target.value.toLowerCase();
-        const filteredUsers = allUsers.filter(
-            user=>(`${user.name.first} ${user.name.last}`
-            .toLowerCase()
-            .includes(value)
-            )
-        );
-        setUsers(filteredUsers);
-    };
+    const [ORP, setORP] = useState([]);
+    useEffect(() => {
+        (async () => {
+            let result;
+            try {
+                const response = await fetch(`${process.env.REACT_APP_SECRET_APIPATH}api/sensorrecord/query?periodid=${fishtankId}&sensortype=Oxidation-reduction%20potential(ORP)`);
+                result = await response.json();
+
+            } catch (error) {
+                console.log(error);
+                result = [];
+            }
+            setORP([result.data[0],result.data[1]]);
+           
+        })();
+    }, []);
+
+    const [oxygen, setOxygen] = useState([]);
+    useEffect(() => {
+        (async () => {
+            let result;
+            try {
+                const response = await fetch(`${process.env.REACT_APP_SECRET_APIPATH}api/sensorrecord/query?periodid=${fishtankId}&sensortype=Dissolved%20Oxygen`);
+                result = await response.json();
+            } catch (error) {
+                console.log(error);
+                result = [];
+            }
+            setOxygen([result.data[0],result.data[1]]);
+   
+        })();
+    }, []);
+
+    const [TDS, setTDS] = useState([]);
+    useEffect(() => {
+        (async () => {
+            let result;
+            try {
+                const response = await fetch(`${process.env.REACT_APP_SECRET_APIPATH}api/sensorrecord/query?periodid=${fishtankId}&sensortype=Total%20Dissolved%20Solids`);
+                result = await response.json();
+            } catch (error) {
+                console.log(error);
+                result = [];
+            }
+            setTDS([result.data[0],result.data[1]]);
+          
+            
+        })();
+    }, []);
+
+    const [ammonium, setAmmonium] = useState([]);
+    useEffect(() => {
+        (async () => {
+            let result;
+            try {
+                const response = await fetch(`${process.env.REACT_APP_SECRET_APIPATH}api/sensorrecord/query?periodid=${fishtankId}&sensortype=Ammonium%20concentration`);
+                result = await response.json();
+            } catch (error) {
+                console.log(error);
+                result = [];
+            }
+            setAmmonium([result.data[0],result.data[1]]);
+        
+        })();
+    }, []);
+    
+    const [nitrates, setNitrates] = useState([]);
+    useEffect(() => {
+        (async () => {
+            let result;
+            try {
+                const response = await fetch(`${process.env.REACT_APP_SECRET_APIPATH}api/sensorrecord/query?periodid=${fishtankId}&sensortype=Nitrates%20concentration`);
+                result = await response.json();
+            } catch (error) {
+                console.log(error);
+                result = [];
+            }
+            setNitrates([result.data[0],result.data[1]]);
+        
+        })();
+    }, []);
+
+    const [chlorophyll, setChlorophyll] = useState([]);
+    useEffect(() => {
+        (async () => {
+            let result;
+            try {
+                const response = await fetch(`${process.env.REACT_APP_SECRET_APIPATH}api/sensorrecord/query?periodid=${fishtankId}&sensortype=Chlorophyll`);
+                result = await response.json();
+            } catch (error) {
+                console.log(error);
+                result = [];
+            }
+            setChlorophyll([result.data[0],result.data[1]]);
+         
+        })();
+    }, []);
+    
+ 
+
+    const allData=[pHvalue,chlorophyll,ammonium,oxygen,nitrates,ORP,TDS]
+    var data =[pHvalue,chlorophyll,ammonium,oxygen,nitrates,ORP,TDS];
+
+  
+
+   
     return (
         <div className='DashboardBox'>
-            <h1>SocialCard</h1>
-            <input className='search-box' placeholder='Search...' onInput={filterCard}/>
+        
+            <h1>Sensor</h1>
+           
             <div className="cards-container">
-
-                {users.map((user, index) => (
-                    <SocialCard key={index} userData={user} />
-                ))}
+               
+               { data.map((d,i)=>d.length>0 ?<SocialCard key={i} userData={d} />:null )}
+                
             </div>
-         </div>
+        </div>
 
     );
 
